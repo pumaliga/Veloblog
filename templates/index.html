@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'new-post' %}">New post</a>
+        <a href="{% url 'profile' request.user.pk %}">Profile</a>
+    </div>
+    <hr>
+
+    <div style="display: flex">
+        {% for post in post_list %}
+            <div style="margin-right: 15px">
+                <img src="{{ post.photo.url }}" alt="user-avatar" style="width: 200px; height: 200px">
+                <div>
+                    <a href="{% url 'profile' post.user.pk %}">{{ post.user.username }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <span>Already has account? <a href="{% url 'login' %}">Login</a></span>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Register">
+    </form>
+
+{% endblock %}

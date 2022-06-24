@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <a href="{% url 'index' %}">Home page</a>
+        {% if request.user != customuser %}
+            <a href="#">Send message {{ customuser.username }}</a>
+        {% endif %}
+    </div>
+
+
+    {% for post in posts %}
+        <img src="{{ post.photo.url }}" alt="post-photo" style="height: 300px; width: 300px">
+        <p>{{ post.title }}</p>
+        <p>{{ post.created }}</p>
+        {% if post.user == customuser %}
+            <form method="post" action="{% url 'delete-post' post.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+            <a href="{% url 'update-post' post.pk %}">Update</a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
